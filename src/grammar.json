@@ -1833,6 +1833,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "flag"
+        },
+        {
+          "type": "SYMBOL",
           "name": "word"
         },
         {
@@ -1868,6 +1872,75 @@
           "name": "process_substitution"
         }
       ]
+    },
+    "flag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "long_flag"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "short_flag"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "="
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "placeholder"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "long_flag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[a-zA-Z\\-]+"
+        }
+      ]
+    },
+    "short_flag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "-"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[a-zA-Z]"
+        }
+      ]
+    },
+    "placeholder": {
+      "type": "PATTERN",
+      "value": ".+"
     },
     "concatenation": {
       "type": "PREC",
@@ -2509,7 +2582,7 @@
             "members": [
               {
                 "type": "PATTERN",
-                "value": "[^#'\"<>{}\\[\\]()`$|&;\\\\\\s]"
+                "value": "[^#'\"<>{}\\[\\]()`$|&;\\\\\\s=]"
               },
               {
                 "type": "SEQ",
@@ -2533,7 +2606,7 @@
               "members": [
                 {
                   "type": "PATTERN",
-                  "value": "[^'\"<>{}\\[\\]()`$|&;\\\\\\s]"
+                  "value": "[^'\"<>{}\\[\\]()`$|&;\\\\\\s=]"
                 },
                 {
                   "type": "SEQ",

@@ -8,6 +8,7 @@ const SPECIAL_CHARACTERS = [
   '|', '&', ';',
   '\\',
   '\\s',
+  '=',
 ];
 
 module.exports = grammar({
@@ -423,6 +424,7 @@ module.exports = grammar({
     ),
 
     _primary_expression: $ => choice(
+      $.flag,
       $.word,
       $.string,
       $.raw_string,
@@ -433,6 +435,30 @@ module.exports = grammar({
       $.command_substitution,
       $.process_substitution
     ),
+
+    flag: $ => seq(
+      choice($.long_flag, $.short_flag),
+      optional(seq('=', $.placeholder)),
+    ),
+
+    long_flag: $ => seq(
+      '--',
+      /[a-zA-Z\-]+/,
+    ),
+
+    short_flag: $ => seq(
+      '-',
+      /[a-zA-Z]/,
+    ),
+
+    placeholder: $ => /.+/,
+
+    // das hier hinter 'flag:' geht, aber teilt es offensichtlich nicht auf
+
+    // seq(
+    //   choice(/\-[a-zA-Z]/, /\-\-[a-zA-Z\-]/),
+    //   token.immediate(optional(/=.+/)),
+    // ),
 
     concatenation: $ => prec(-1, seq(
       choice(
