@@ -22,6 +22,8 @@ enum TokenType {
   HEREDOC_ARROW,
   HEREDOC_ARROW_DASH,
   NEWLINE,
+  FLAG_START,
+  FLAG_ARGUMENT
 };
 
 struct Scanner {
@@ -168,6 +170,16 @@ struct Scanner {
   }
 
   bool scan(TSLexer *lexer, const bool *valid_symbols) {
+    if (valid_symbols[FLAG_ARGUMENT]) {
+      if (lexer->lookahead == '=') {
+        while (!iswspace(lexer->lookahead) && lexer->lookahead != 0) {
+          advance(lexer);
+        }
+        lexer->result_symbol = FLAG_ARGUMENT;
+        return true;
+      }
+    }
+
     if (valid_symbols[CONCAT]) {
       if (!(
         lexer->lookahead == 0 ||
@@ -188,6 +200,18 @@ struct Scanner {
         lexer->result_symbol = CONCAT;
         return true;
       }
+    }
+
+    if (valid_symbols[FLAG_START]) {
+      while (iswspace(lexer->lookahead)) skip(lexer);
+      if (lexer->lookahead == '-') {
+        while (lexer->lookahead != '=' && !iswspace(lexer->lookahead) && lexer->lookahead != 0) {
+          advance(lexer);
+        }
+        lexer->result_symbol = FLAG_START;
+        return true;
+      }
+      return false;
     }
 
     if (valid_symbols[EMPTY_VALUE]) {

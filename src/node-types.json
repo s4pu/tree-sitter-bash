@@ -54,6 +54,10 @@
         "named": true
       },
       {
+        "type": "flag",
+        "named": true
+      },
+      {
         "type": "process_substitution",
         "named": true
       },
@@ -694,6 +698,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "flag",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "flag_argument",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1582,6 +1601,10 @@
   },
   {
     "type": "file_descriptor",
+    "named": true
+  },
+  {
+    "type": "flag_argument",
     "named": true
   },
   {

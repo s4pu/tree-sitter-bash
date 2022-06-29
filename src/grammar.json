@@ -1833,6 +1833,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "flag"
+        },
+        {
+          "type": "SYMBOL",
           "name": "word"
         },
         {
@@ -1866,6 +1870,27 @@
         {
           "type": "SYMBOL",
           "name": "process_substitution"
+        }
+      ]
+    },
+    "flag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_flag_start"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "flag_argument"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -2676,6 +2701,14 @@
     {
       "type": "STRING",
       "value": "\n"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_flag_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "flag_argument"
     }
   ],
   "inline": [

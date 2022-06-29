@@ -39,6 +39,8 @@ module.exports = grammar({
     '<<',
     '<<-',
     '\n',
+    $._flag_start,
+    $.flag_argument
   ],
 
   extras: $ => [
@@ -423,6 +425,7 @@ module.exports = grammar({
     ),
 
     _primary_expression: $ => choice(
+      $.flag,
       $.word,
       $.string,
       $.raw_string,
@@ -433,6 +436,8 @@ module.exports = grammar({
       $.command_substitution,
       $.process_substitution
     ),
+
+    flag: $ => seq($._flag_start, optional($.flag_argument)),
 
     concatenation: $ => prec(-1, seq(
       choice(
