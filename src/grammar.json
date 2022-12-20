@@ -1224,37 +1224,6 @@
                   {
                     "type": "SYMBOL",
                     "name": "_literal"
-                  },
-                  {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "STRING",
-                            "value": "=~"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "=="
-                          }
-                        ]
-                      },
-                      {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "_literal"
-                          },
-                          {
-                            "type": "SYMBOL",
-                            "name": "regex"
-                          }
-                        ]
-                      }
-                    ]
                   }
                 ]
               }
@@ -1804,10 +1773,6 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "concatenation"
-        },
-        {
-          "type": "SYMBOL",
           "name": "_primary_expression"
         },
         {
@@ -1879,18 +1844,6 @@
         {
           "type": "SYMBOL",
           "name": "_flag_start"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "flag_argument"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         }
       ]
     },

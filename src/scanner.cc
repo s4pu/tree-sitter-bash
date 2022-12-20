@@ -170,7 +170,7 @@ struct Scanner {
   }
 
   bool scan(TSLexer *lexer, const bool *valid_symbols) {
-    if (valid_symbols[FLAG_ARGUMENT]) {
+    if (false && valid_symbols[FLAG_ARGUMENT]) {
       if (lexer->lookahead == '=') {
         while (!iswspace(lexer->lookahead) && lexer->lookahead != 0) {
           advance(lexer);

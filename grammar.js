@@ -296,10 +296,10 @@ module.exports = grammar({
       field('name', $.command_name),
       repeat(field('argument', choice(
         $._literal,
-        seq(
+        /*seq(
           choice('=~', '=='),
           choice($._literal, $.regex)
-        )
+        )*/
       )))
     )),
 
@@ -419,7 +419,7 @@ module.exports = grammar({
     // Literals
 
     _literal: $ => choice(
-      $.concatenation,
+      // $.concatenation,
       $._primary_expression,
       alias(prec(-2, repeat1($._special_character)), $.word)
     ),
@@ -437,7 +437,7 @@ module.exports = grammar({
       $.process_substitution
     ),
 
-    flag: $ => seq($._flag_start, optional($.flag_argument)),
+    flag: $ => seq($._flag_start/*, optional($.flag_argument)*/),
 
     concatenation: $ => prec(-1, seq(
       choice(
